@@ -1,0 +1,6 @@
+[window]
+decorations = "None"
+opacity = 0.85
+[font]
+normal = {family = "JetBrainsMonoNerdFont", style="Regular"}
+size = 15

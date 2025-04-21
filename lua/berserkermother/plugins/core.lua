@@ -1,5 +1,12 @@
 return {
   -- { 'prichrd/netrw.nvim',      opts = {} },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+    -- use opts = {} for passing setup options
+    -- this is equivalent to setup({}) function
+  },
   { "ellisonleao/gruvbox.nvim" },
   { "rose-pine/neovim",        name = "rose-pine" },
   { 'luisiacc/gruvbox-baby' },
@@ -16,6 +23,8 @@ return {
     end
   },
   { "savq/melange-nvim" },
+  -- nvim tree
+  { "nvim-tree/nvim-tree.lua" },
   {
     "stevearc/conform.nvim",
   },
@@ -71,7 +80,7 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   -- These are some examples, uncomment them if you want to see them work!
-  { 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' },
+  { 'VonHeikemen/lsp-zero.nvim',               branch = 'v4.x' },
   { 'neovim/nvim-lspconfig' },
   { 'hrsh7th/cmp-nvim-lsp' },
   { 'hrsh7th/nvim-cmp' },
@@ -89,20 +98,9 @@ return {
   },
 
   {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-    dependencies = "neovim/nvim-lspconfig",
-    config = function(_, _)
-      require("rust-tools").setup(opts)
-    end,
-  },
-
-  {
-    "rust-lang/rust.vim",
-    ft = "rust",
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end,
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false, -- This plugin is already lazy
   },
   {
     "terrortylor/nvim-comment",

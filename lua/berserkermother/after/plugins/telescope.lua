@@ -1,14 +1,14 @@
 local telescope = require("telescope")
 
-telescope.load_extension('fzy_native')
+-- telescope.load_extension('fzy_native')
 telescope.setup({
   defaults = {
-    theme = "ivy", -- Set the default theme to 'ivy'
+    theme = "ivy",                -- Set the default theme to 'ivy'
     layout_strategy = "bottom_pane", -- Ivy theme typically uses bottom_pane layout
+    preview = true,
     layout_config = {
       height = 100, -- Full height
-      width = 100, -- Full width
-      preview_cutoff = 0, -- Show preview for all sizes
+      width = 200, -- Full width
     },
     sorting_strategy = "ascending", -- Display results in ascending order
     prompt_prefix = "search: ", -- Customize the prompt symbol
@@ -20,6 +20,11 @@ telescope.setup({
       results = { " " },
       preview = { " " },
     },
+  },
+  pickers = {
+    find_files = {
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+    }
   },
   mappings = {
     n = { ["q"] = require("telescope.actions").close },

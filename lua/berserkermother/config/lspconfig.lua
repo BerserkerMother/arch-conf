@@ -57,27 +57,25 @@ lspconfig.clangd.setup({})
 
 lspconfig.html.setup({})
 
+-- rust
+-- local rt = require("rust-tools")
+
+-- rt.setup({
+--   server = {
+--     on_attach = function(_, bufnr)
+--       -- Hover actions
+--       vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+--     end,
+--     capabilities = capabilities,
+--   },
+-- })
+
 lspconfig.jsonls.setup({
   filetypes = { "json" },
 })
 
-lspconfig.pylsp.setup({
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          enabled = false,
-        },
-        black = {
-          enabled = true,
-        },
-      },
-    },
-  },
-})
-
+lspconfig.pylsp.setup {}
 local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup({
   snippet = {
@@ -85,21 +83,28 @@ cmp.setup({
       require("luasnip").lsp_expand(args.body) -- Use LuaSnip to expand snippets
     end,
   },
-  sources = {
-    { name = 'nvim_lsp' },
-  },
-  preselect = 'item',
-  completion = {
-    completeopt = 'menu,menuone,noinsert'
-  },
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+  }),
+  preselect = 'none',
+  -- completion = {
+  --   completeopt = 'menu,menuone,noinsert'
+  -- },
   mapping = cmp.mapping.preset.insert({
     -- confirm completion
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
 
     -- scroll up and down the documentation window
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
   }),
 })
+
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)

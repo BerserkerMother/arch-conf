@@ -37,3 +37,5 @@ o.termguicolors = true
 vim.opt.undofile = true
 -- Set the directory where undo files will be stored
 vim.opt.undodir = os.getenv("HOME") .. "/.local/state/undodir"
+-- 24 bit color
+vim.opt.termguicolors = true

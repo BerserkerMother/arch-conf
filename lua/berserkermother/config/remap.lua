@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<C-n>", vim.cmd.Ex)
 vim.keymap.set("n", "<C-s>", ":w<CR>")
+vim.keymap.set("n", "du", ":d_<CR>")
 
 -- telescope
 local telescope = require('telescope.builtin')
@@ -43,19 +44,19 @@ vim.keymap.set("n", "<C-e>", function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 
-vim.keymap.set("n", "<C-1>", function()
+vim.keymap.set("n", "<A-1>", function()
   harpoon:list():select(1)
 end)
-vim.keymap.set("n", "<C-2>", function()
+vim.keymap.set("n", "<A-2>", function()
   harpoon:list():select(2)
 end)
-vim.keymap.set("n", "<C-3>", function()
+vim.keymap.set("n", "<A-3>", function()
   harpoon:list():select(3)
 end)
-vim.keymap.set("n", "<C-4>", function()
+vim.keymap.set("n", "<A-4>", function()
   harpoon:list():select(4)
 end)
-vim.keymap.set("n", "<C-5>", function()
+vim.keymap.set("n", "<A-5>", function()
   harpoon:list():select(5)
 end)
 
@@ -81,3 +82,9 @@ vim.api.nvim_set_keymap('v', '<space>/', '<Plug>(comment_toggle_linewise_visual)
 
 -- open term
 vim.keymap.set('n', '<leader>ll', ":term<CR>")
+
+-- nvim tree
+-- vim.keymap.set('n', '<C-n>', ":NvimTreeToggle<CR>")
+
+-- disable search highlight
+vim.api.nvim_set_keymap('n', '<esc>', ":noh<CR><esc>", { noremap = true, silent = true})
